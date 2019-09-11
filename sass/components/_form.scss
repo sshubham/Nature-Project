@@ -1,0 +1,122 @@
+.form {
+
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+
+        font-size: 1.5rem;
+        font-family: inherit;//It will automatically inherit the font family as well
+        color: inherit;//As form inputs do not inherit font properties
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white,.5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all .2s;
+
+        
+        @include respond(tab-port){
+            width: 100%;
+        }
+
+
+        &::-webkit-input-placeholder {
+        color: $color-grey-dark-2;
+    }
+
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black,.1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+    }
+
+
+    &__label {
+
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .2s;
+        color: inherit;
+    }
+
+
+
+    &__input:placeholder-shown + &__label {//Here we make use of sibling selector "+" (adjacent sibling) ~ (normal sibling) means the sibling
+        //just after the element which we selected
+        //(like after the input there is label) as input and label are siblings of form__group
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+
+    &__radio-group {
+        width: 49%;
+        display: inline-block;
+
+        @include respond(tab-port){
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: $default-font-size;
+        cursor: pointer;
+        padding-left:3.5rem; 
+        position: relative;
+    }
+
+    &__radio-button {
+
+        height: 2.4rem;
+        width: 2.4rem;
+        border: 4px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;//To make it exactly circle
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+        &::after {
+            content: "";
+            height: 1rem;
+            width: 1rem;
+            display: block;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: all .2s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+
+
+
+}

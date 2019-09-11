@@ -1,0 +1,152 @@
+.popup {
+
+    height: 100vh;
+    width: 100%;
+    position: fixed;//It dosent move as we scroll
+    top: 0;
+    left: 0; 
+    background-color: rgba($color-black,.8);
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    
+
+//For checking for browser supports @supports (property name with value)
+//This is gracefull degradation 
+@supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+//If this property is supported then we perform this...
+
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+background-color: rgba($color-black,.3);
+
+} 
+
+    &__content {
+
+        @include absCenter;
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black,.2);
+        border-radius: 3px;
+        display: table;//This functions as table and then left and right works as table cells
+
+        overflow: hidden;
+
+
+        opacity: 0;
+        transform: translate(-50%,-50%) scale(.25);
+        transition: all .5s .2s;
+
+        @include respond(tab-land) {
+            width: 75%;
+        }
+        
+        @include respond(tab-port) {
+            display: block;
+        }
+    }
+
+    &__left {
+
+        width: 33.333333%;
+        display: table-cell;//To occupy the full width of the parent set parent to display: table
+
+        @include respond(tab-port) {
+            display: block;
+            width: 102%;
+        }
+        
+    }
+
+    &__right {
+width: 66.666667%;
+display: table-cell;
+vertical-align: middle;
+padding: 3rem 5rem;
+
+@include respond(tab-port) {
+            display: block;
+            width: 100%;
+            padding: 1.5rem 3.5rem;
+        }
+    }
+
+    &__img {
+display: block;
+width: 100%;
+
+@include respond(tab-port) {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 2rem;
+            height: 25rem;
+        }
+
+        @include respond(phone) {
+            display: none;
+        }
+
+    }
+
+    &__text {
+
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        -moz-column-count: 2;//It will automatically create for us two columns
+        -moz-column-gap: 4rem; //gap between columns
+        -moz-column-rule: 1px solid $color-grey-dark-1;//It is the border wich is exactly in the middle of these two columns
+
+        column-count: 2;//It will automatically create for us two columns
+        column-gap: 4rem; //gap between columns
+        column-rule: 1px solid $color-grey-dark-1;//It is the border wich is exactly in the middle of these two columns
+
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+
+        hyphens: auto;
+
+        @include respond(tab-port) {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+
+    
+    //when we click book now popup will become target so we can use target class
+
+    //open states
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%,-50%) scale(1);
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+}

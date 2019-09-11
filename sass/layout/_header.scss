@@ -1,0 +1,80 @@
+.header {
+
+    height: 85vh;
+    background-image: linear-gradient(to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)), 
+    url(../img/hero-small.jpg);
+    background-size: cover;
+    background-position: top;
+    /*
+    -webkit-clip-path: polygon(0 0 , 100% 0 , 100% 75vh , 0 100% );
+    clip-path: polygon(0 0 , 100% 0 , 100% 75vh , 0 100% ); /*x y , x y , x y , x y   use clippy website for coordinates */
+    
+    position: relative;
+
+    @supports (-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)) {
+    height: 95vh;
+    -webkit-clip-path: polygon(0 0 , 100% 0 , 100% 75vh , 0 100% );
+    clip-path: polygon(0 0 , 100% 0 , 100% 75vh , 0 100% );
+    }  
+
+//For responsive images 
+//High resolution screen
+//, act as or
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),//600px
+        only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),//For safari browser as safari dont support 192dpi
+        only screen and (min-width: 125em)//2000px //As with of the image is 2000px
+     {
+
+    background-image: linear-gradient(to right bottom,
+    rgba($color-primary-light, 0.8),
+    rgba($color-primary-dark, 0.8)), 
+    url(../img/hero.jpg);
+  
+    }
+
+    
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0 , 100% 0 , 100% 85vh , 0 100% );
+    clip-path: polygon(0 0 , 100% 0 , 100% 85vh , 0 100% );
+    }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+
+        
+     @include respond(tab-port) {
+     
+        top: 3rem;
+        left: 3rem;
+    }   
+
+
+     @include respond(phone) {
+     
+        top: 2rem;
+        left: 2rem;
+    }   
+
+       }
+
+       &__logo {
+        height: 3.5rem;
+       }
+
+       //To make heading primary and all its span elements in center or middle of header
+
+       &__text-box {
+        position: absolute;
+        top: 40%;
+        left:50%;
+        transform: translate(-50%,-50%); //only x any y values it is shifting wrt the element itself
+        text-align: center;
+        
+       }
+
+}

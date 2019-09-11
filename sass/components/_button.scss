@@ -1,0 +1,135 @@
+
+/*Creating a complex animated button...*/
+.btn {
+    &,
+    &:link,
+&:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+/* if we specify  padding
+one value - then the value will be applied in all the direction Top bottom left right
+two values - then the first value will be for top and bottom and second one will be for left and right 
+four values - then the order will be Top , Right , Bottom , Left
+*/    
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    //As it is inline block it is treated as text so in text-box text-align property is set to center
+    
+    border-radius: 10rem;
+    //For animations
+    transition: all .2s;
+
+    position: relative;
+
+    font-size: $default-font-size;
+
+//Change for <button> element as buttons by default come with border
+
+border: none;
+cursor: pointer;
+
+}
+
+&:hover
+ {
+    transform: translateY(-.3rem); // Y axis move from top to bottom so to move towards top we use -ve value 
+    box-shadow: 0 1rem 2rem rgba($color-black, .2); // x y and blur and color of blur which is black For shadow effect Its nice 
+
+
+    // To Style psuedo button when we are in hover state*/
+
+&::after {
+    transform: scaleX(1.4) scaleY(1.6); /*increases the size of the original element*/
+    /*For fading out*/
+    opacity: 0;
+}
+
+}
+//When we click a link it in active state
+
+&:active ,
+&:focus {
+    outline: none;//For button element  
+    transform: translateY(-.1rem);
+    box-shadow: 0 .5rem 1rem rgba($color-black, .2); //x y and blur For shadow effect Its nice 
+}
+
+&--white {
+
+    background-color:$color-white;
+    color: $color-grey-dark;
+
+    
+&::after {
+    background-color: $color-white;
+}
+
+}
+
+&--green {
+
+    background-color:$color-primary;
+    color: $color-white;
+
+    
+&::after {
+    background-color: $color-primary;
+}
+
+}
+
+&::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+
+    // To hide the pseudo button behind the main button
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; // To hide the pseudo button behind the main button
+
+    transition: all .4s;
+
+}
+
+&--animated {
+    animation: moveInBottom .3s ease-out .75s;
+    /*name time timing-function delay*/
+    animation-fill-mode: backwards;
+}
+
+}
+
+
+.btn-text {
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        color: $color-primary;
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: .1rem solid $color-primary;
+        padding: .3rem;
+        transition: all .2s; 
+    }
+
+    &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+            box-shadow: 0 1rem 2rem rgba($color-black, .15);
+            transform: translateY(-2px);
+    }
+
+    &:active {
+        box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+        transform: translateY(-1px);
+    }
+  
+}  
+
+
+

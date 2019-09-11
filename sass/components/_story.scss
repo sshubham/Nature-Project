@@ -1,0 +1,103 @@
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, .15);
+    background-color: rgba($color-white,.6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+
+    }
+
+    @include respond(phone){
+         transform: skewX(0);
+
+    }
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;//for shape to be left
+        /*
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%); //For text to flow outside the element as a circle 
+        //first value is radius 50% means half the height and width of the circle
+        // at 50% 50% means this is the center horizontally and vertically
+        //For this to work the element should be floated and the element should have defined width and height
+*/
+        
+        //Dont mess with margins in case of floated element
+
+        transform: translateX(-3rem) skewX(12deg);//to move the circle towards left
+        
+        position: relative; // For captions to be at center of image
+
+        overflow: hidden;
+
+        border-radius: 50%;
+
+        @supports (-webkit-clip-path: polygon(0 0)) or (clip-path: polygon(0 0)) {
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);//To make a circle
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);
+        border-radius: none;
+    }
+
+        
+    @include respond(phone){
+         transform: translateX(-3rem) skewX(0);
+    }
+
+    }
+
+    &__img {
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+        
+    @include respond(phone){
+         transform: skewX(0);
+    }
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,20%);//initial position before hover
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;//to make element invisible
+
+        transition: all .5s;
+        backface-visibility: hidden;
+
+    }
+
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%,-50%); 
+    }
+
+    &:hover &__img {//When we hover the story we want to change the image
+
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);//For blur effect of the image and brightness the value low than 100% makes it darker and the value above 100% makes it brighter
+    }
+
+}
